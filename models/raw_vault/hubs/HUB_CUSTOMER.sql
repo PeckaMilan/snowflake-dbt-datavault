@@ -11,40 +11,24 @@
     =========================================================================
     HUB: HUB_CUSTOMER (Dynamic Table)
     =========================================================================
-
-    Hub entity
-
-    
-
-    Business Keys:
-    - CUSTOMER_ID
+    Business Keys: CUSTOMER_ID
 #}
 
 SELECT
     HK_H_HUB_CUSTOMER,
     CUSTOMER_ID,
-    EFFECTIVE_TS,
-    DWH_VALID_TS,
-    DSS_RECORD_SOURCE
+    LOAD_TS,
+    RECORD_SOURCE
 FROM (
     SELECT
-        -- Hash Key (Data Vault 2.0 pattern)
         {{ dv_hash(['CUSTOMER_ID'], 'HK_H_HUB_CUSTOMER') }},
-
-        -- Business Keys
         CUSTOMER_ID,
-
-        -- Technical Columns
-        EFFECTIVE_TS,
-        DWH_VALID_TS,
-        DSS_RECORD_SOURCE
-
-    FROM {{ source('demo_db_dbt_dev', 'RAW_ORDERS') }}
-
+        CURRENT_TIMESTAMP() AS LOAD_TS,
+        'RAW_CUSTOMERS' AS RECORD_SOURCE
+    FROM {{ source('demo_db_dbt_dev', 'RAW_CUSTOMERS') }}
     WHERE CUSTOMER_ID IS NOT NULL
 )
--- Deduplication (Data Vault 2.0 pattern)
 QUALIFY ROW_NUMBER() OVER (
     PARTITION BY HK_H_HUB_CUSTOMER
-    ORDER BY DWH_VALID_TS
+    ORDER BY LOAD_TS
 ) = 1

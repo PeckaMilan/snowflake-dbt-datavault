@@ -11,40 +11,24 @@
     =========================================================================
     HUB: HUB_STORE (Dynamic Table)
     =========================================================================
-
-    Hub entity
-
-    
-
-    Business Keys:
-    - STORE_KEY
+    Business Keys: STORE_KEY
 #}
 
 SELECT
     HK_H_HUB_STORE,
     STORE_KEY,
-    EFFECTIVE_TS,
-    DWH_VALID_TS,
-    DSS_RECORD_SOURCE
+    LOAD_TS,
+    RECORD_SOURCE
 FROM (
     SELECT
-        -- Hash Key (Data Vault 2.0 pattern)
         {{ dv_hash(['STORE_KEY'], 'HK_H_HUB_STORE') }},
-
-        -- Business Keys
         STORE_KEY,
-
-        -- Technical Columns
-        EFFECTIVE_TS,
-        DWH_VALID_TS,
-        DSS_RECORD_SOURCE
-
+        CURRENT_TIMESTAMP() AS LOAD_TS,
+        'RAW_ORDERS' AS RECORD_SOURCE
     FROM {{ source('demo_db_dbt_dev', 'RAW_ORDERS') }}
-
     WHERE STORE_KEY IS NOT NULL
 )
--- Deduplication (Data Vault 2.0 pattern)
 QUALIFY ROW_NUMBER() OVER (
     PARTITION BY HK_H_HUB_STORE
-    ORDER BY DWH_VALID_TS
+    ORDER BY LOAD_TS
 ) = 1

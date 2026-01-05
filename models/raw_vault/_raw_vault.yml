@@ -1,152 +1,37 @@
 version: 2
 models:
 - name: HUB_CUSTOMER
-  description: Hub for HUB_CUSTOMER
+  description: Hub for Customer business entity
   columns:
   - name: CUSTOMER_ID
-    description: CUSTOMER_ID column
+    description: Business key for customer
     tests:
     - not_null
-  meta:
-    source_system: UNKNOWN
 - name: HUB_ORDER
-  description: Hub for HUB_ORDER
+  description: Hub for Order business entity
   columns:
   - name: ORDER_ID
-    description: ORDER_ID column
+    description: Business key for order
     tests:
     - not_null
-  meta:
-    source_system: UNKNOWN
 - name: HUB_PRODUCT
-  description: Hub for HUB_PRODUCT
+  description: Hub for Product business entity
   columns:
   - name: PRODUCT_ID
-    description: PRODUCT_ID column
+    description: Business key for product
     tests:
     - not_null
-  meta:
-    source_system: UNKNOWN
 - name: HUB_STORE
-  description: Hub for HUB_STORE
+  description: Hub for Store business entity
   columns:
   - name: STORE_KEY
-    description: STORE_KEY column
+    description: Business key for store
     tests:
     - not_null
-  meta:
-    source_system: UNKNOWN
 - name: HUB_SUPPLIER
-  description: Hub for HUB_SUPPLIER
+  description: Hub for Supplier business entity
   columns:
   - name: SUPPLIER_ID
-    description: SUPPLIER_ID column
+    description: Business key for supplier
     tests:
     - not_null
-  meta:
-    source_system: UNKNOWN
-- name: SAT_CUSTOMER_DEMOGRAPHIC
-  description: Satellite for SAT_CUSTOMER_DEMOGRAPHIC
-  columns:
-  - name: FIRST_NAME
-    description: FIRST_NAME column
-  - name: LAST_NAME
-    description: LAST_NAME column
-  - name: CITY
-    description: CITY column
-  - name: COUNTRY
-    description: COUNTRY column
-  meta:
-    source_system: UNKNOWN
-- name: SAT_CUSTOMER_PII
-  description: Satellite for SAT_CUSTOMER_PII
-  columns:
-  - name: CUSTOMER_EMAIL
-    description: CUSTOMER_EMAIL column
-  meta:
-    source_system: UNKNOWN
-- name: SAT_CUSTOMER_METADATA
-  description: Satellite for SAT_CUSTOMER_METADATA
-  columns:
-  - name: CREATED_DATE
-    description: CREATED_DATE column
-  meta:
-    source_system: UNKNOWN
-- name: SAT_ORDER_DETAILS
-  description: Satellite for SAT_ORDER_DETAILS
-  columns:
-  - name: ORDER_DATE
-    description: ORDER_DATE column
-  - name: COMPLETION_DATE
-    description: COMPLETION_DATE column
-  - name: TOTAL_PRICE
-    description: TOTAL_PRICE column
-  - name: ORDER_STATE
-    description: ORDER_STATE column
-  - name: PAYMENT_STATE
-    description: PAYMENT_STATE column
-  - name: PAYMENT_METHOD
-    description: PAYMENT_METHOD column
-  meta:
-    source_system: UNKNOWN
-- name: SAT_PRODUCT_DESCRIPTION
-  description: Satellite for SAT_PRODUCT_DESCRIPTION
-  columns:
-  - name: PRODUCT_NAME
-    description: PRODUCT_NAME column
-  - name: CATEGORY
-    description: CATEGORY column
-  - name: PRICE
-    description: PRICE column
-  - name: STOCK_QUANTITY
-    description: STOCK_QUANTITY column
-  meta:
-    source_system: UNKNOWN
-- name: LINK_ORDER_PRODUCT
-  description: Link for LINK_ORDER_PRODUCT
-  columns:
-  - name: ORDER_ID
-    description: ORDER_ID column
-    tests:
-    - not_null
-  - name: PRODUCT_ID
-    description: PRODUCT_ID column
-    tests:
-    - not_null
-  meta:
-    source_system: UNKNOWN
-- name: LINK_ORDER_CUSTOMER
-  description: Link for LINK_ORDER_CUSTOMER
-  columns:
-  - name: ORDER_ID
-    description: ORDER_ID column
-    tests:
-    - not_null
-  - name: CUSTOMER_ID
-    description: CUSTOMER_ID column
-    tests:
-    - not_null
-  meta:
-    source_system: UNKNOWN
-- name: LINK_ORDER_STORE
-  description: Link for LINK_ORDER_STORE
-  columns:
-  - name: ORDER_ID
-    description: ORDER_ID column
-    tests:
-    - not_null
-  - name: STORE_KEY
-    description: STORE_KEY column
-    tests:
-    - not_null
-  meta:
-    source_system: UNKNOWN
-- name: LINK_PRODUCT_SUPPLIER
-  description: Link for LINK_PRODUCT_SUPPLIER
-  columns:
-  - name: PRODUCT_ID
-    description: PRODUCT_ID column
-  - name: SUPPLIER_ID
-    description: SUPPLIER_ID column
-  meta:
-    source_system: UNKNOWN
