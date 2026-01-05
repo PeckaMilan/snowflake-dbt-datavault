@@ -27,29 +27,11 @@ models:
     - not_null
   meta:
     source_system: UNKNOWN
-- name: HUB_CUSTOMER
-  description: Hub for HUB_CUSTOMER
-  columns:
-  - name: CUSTOMER_ID
-    description: CUSTOMER_ID column
-    tests:
-    - not_null
-  meta:
-    source_system: UNKNOWN
 - name: HUB_STORE
   description: Hub for HUB_STORE
   columns:
   - name: STORE_KEY
     description: STORE_KEY column
-    tests:
-    - not_null
-  meta:
-    source_system: UNKNOWN
-- name: HUB_PRODUCT
-  description: Hub for HUB_PRODUCT
-  columns:
-  - name: PRODUCT_ID
-    description: PRODUCT_ID column
     tests:
     - not_null
   meta:
