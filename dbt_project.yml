@@ -1,0 +1,32 @@
+name: 'data_vault_customers'
+version: '1.0.0'
+config-version: 2
+
+profile: 'snowflake_native'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+vars:
+  hash_algorithm: 'MD5'
+
+models:
+  data_vault_customers:
+    staging:
+      +materialized: view
+    raw_vault:
+      +schema: raw_vault
+      hubs:
+        +materialized: dynamic_table
+        +snowflake_warehouse: 'COMPUTE_WH'
+        +target_lag: '1 day'
+        +tags: ['hub', 'raw_vault']
+      satellites:
+        +materialized: dynamic_table
+        +snowflake_warehouse: 'COMPUTE_WH'
+        +target_lag: '1 day'
+        +tags: ['satellite', 'raw_vault']

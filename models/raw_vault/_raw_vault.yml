@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: hub_customers
+    description: "Hub containing unique customers"
+    columns:
+      - name: HK_H_CUSTOMERS
+        description: "Hash key for customer hub"
+        tests:
+          - unique
+          - not_null
+      - name: CUSTOMER_ID
+        description: "Business key - customer identifier"
+        tests:
+          - not_null
+
+  - name: sat_customers_details
+    description: "Satellite containing customer details"
+    columns:
+      - name: HK_H_CUSTOMERS
+        description: "Foreign key to hub_customers"
+        tests:
+          - not_null
+      - name: HASHDIFF
+        description: "Hash of payload columns for change detection"
+        tests:
+          - not_null
