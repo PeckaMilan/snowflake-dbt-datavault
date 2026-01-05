@@ -1,0 +1,16 @@
+# Profile for Snowflake Native dbt
+# Snowflake Native dbt automatically injects connection details
+
+default:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT', 'hzarukn-ss68974') }}"
+      user: "{{ env_var('DBT_SNOWFLAKE_USER', 'MILANPECKA2') }}"
+      password: "{{ env_var('DBT_SNOWFLAKE_PASSWORD', '') }}"
+      role: ACCOUNTADMIN
+      database: DEMO_DB
+      schema: DBT_DEV
+      warehouse: COMPUTE_WH
+      threads: 4
