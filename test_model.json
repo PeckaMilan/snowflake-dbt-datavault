@@ -1,0 +1,84 @@
+{
+  "entities": [
+    {
+      "name": "HUB_CUSTOMER",
+      "columns": [
+        {"name": "CUSTOMER_ID", "isBusinessKey": true}
+      ],
+      "meta": {
+        "dv_type": "hub",
+        "source_table": "DEMO_DB.DBT_DEV.RAW_CUSTOMERS"
+      }
+    },
+    {
+      "name": "HUB_ORDER",
+      "columns": [
+        {"name": "ORDER_ID", "isBusinessKey": true}
+      ],
+      "meta": {
+        "dv_type": "hub",
+        "source_table": "DEMO_DB.DBT_DEV.RAW_ORDERS"
+      }
+    },
+    {
+      "name": "HUB_PRODUCT",
+      "columns": [
+        {"name": "PRODUCT_ID", "isBusinessKey": true}
+      ],
+      "meta": {
+        "dv_type": "hub",
+        "source_table": "DEMO_DB.DBT_DEV.RAW_PRODUCTS"
+      }
+    },
+    {
+      "name": "SAT_CUSTOMER_DETAILS",
+      "columns": [
+        {"name": "FIRST_NAME"},
+        {"name": "LAST_NAME"},
+        {"name": "CUSTOMER_EMAIL"},
+        {"name": "CITY"},
+        {"name": "COUNTRY"}
+      ],
+      "meta": {
+        "dv_type": "satellite",
+        "parent_hub": "HUB_CUSTOMER",
+        "source_table": "DEMO_DB.DBT_DEV.RAW_CUSTOMERS"
+      }
+    },
+    {
+      "name": "SAT_ORDER_DETAILS",
+      "columns": [
+        {"name": "ORDER_DATE"},
+        {"name": "TOTAL_PRICE"},
+        {"name": "ORDER_STATE"}
+      ],
+      "meta": {
+        "dv_type": "satellite",
+        "parent_hub": "HUB_ORDER",
+        "source_table": "DEMO_DB.DBT_DEV.RAW_ORDERS"
+      }
+    },
+    {
+      "name": "LINK_ORDER_CUSTOMER",
+      "columns": [
+        {"name": "ORDER_ID", "isBusinessKey": true},
+        {"name": "CUSTOMER_ID", "isBusinessKey": true}
+      ],
+      "meta": {
+        "dv_type": "link",
+        "source_table": "DEMO_DB.DBT_DEV.RAW_ORDERS"
+      }
+    },
+    {
+      "name": "LINK_ORDER_PRODUCT",
+      "columns": [
+        {"name": "ORDER_ID", "isBusinessKey": true},
+        {"name": "PRODUCT_ID", "isBusinessKey": true}
+      ],
+      "meta": {
+        "dv_type": "link",
+        "source_table": "DEMO_DB.DBT_DEV.RAW_ORDERS"
+      }
+    }
+  ]
+}

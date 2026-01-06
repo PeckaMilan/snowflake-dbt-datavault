@@ -3,7 +3,7 @@ sources:
 - name: demo_db_dbt_dev
   schema: DBT_DEV
   tables:
+  - name: RAW_ORDERS
   - name: RAW_CUSTOMERS
   - name: RAW_PRODUCTS
-  - name: RAW_ORDERS
   database: DEMO_DB

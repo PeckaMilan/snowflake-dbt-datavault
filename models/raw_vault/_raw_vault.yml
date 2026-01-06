@@ -1,37 +1,81 @@
 version: 2
 models:
 - name: HUB_CUSTOMER
-  description: Hub for Customer business entity
+  description: Hub for HUB_CUSTOMER
   columns:
   - name: CUSTOMER_ID
-    description: Business key for customer
+    description: CUSTOMER_ID column
     tests:
     - not_null
+  meta:
+    source_system: UNKNOWN
 - name: HUB_ORDER
-  description: Hub for Order business entity
+  description: Hub for HUB_ORDER
   columns:
   - name: ORDER_ID
-    description: Business key for order
+    description: ORDER_ID column
     tests:
     - not_null
+  meta:
+    source_system: UNKNOWN
 - name: HUB_PRODUCT
-  description: Hub for Product business entity
+  description: Hub for HUB_PRODUCT
   columns:
   - name: PRODUCT_ID
-    description: Business key for product
+    description: PRODUCT_ID column
     tests:
     - not_null
-- name: HUB_STORE
-  description: Hub for Store business entity
+  meta:
+    source_system: UNKNOWN
+- name: SAT_CUSTOMER_DETAILS
+  description: Satellite for SAT_CUSTOMER_DETAILS
   columns:
-  - name: STORE_KEY
-    description: Business key for store
-    tests:
-    - not_null
-- name: HUB_SUPPLIER
-  description: Hub for Supplier business entity
+  - name: FIRST_NAME
+    description: FIRST_NAME column
+  - name: LAST_NAME
+    description: LAST_NAME column
+  - name: CUSTOMER_EMAIL
+    description: CUSTOMER_EMAIL column
+  - name: CITY
+    description: CITY column
+  - name: COUNTRY
+    description: COUNTRY column
+  meta:
+    source_system: UNKNOWN
+- name: SAT_ORDER_DETAILS
+  description: Satellite for SAT_ORDER_DETAILS
   columns:
-  - name: SUPPLIER_ID
-    description: Business key for supplier
+  - name: ORDER_DATE
+    description: ORDER_DATE column
+  - name: TOTAL_PRICE
+    description: TOTAL_PRICE column
+  - name: ORDER_STATE
+    description: ORDER_STATE column
+  meta:
+    source_system: UNKNOWN
+- name: LINK_ORDER_CUSTOMER
+  description: Link for LINK_ORDER_CUSTOMER
+  columns:
+  - name: ORDER_ID
+    description: ORDER_ID column
     tests:
     - not_null
+  - name: CUSTOMER_ID
+    description: CUSTOMER_ID column
+    tests:
+    - not_null
+  meta:
+    source_system: UNKNOWN
+- name: LINK_ORDER_PRODUCT
+  description: Link for LINK_ORDER_PRODUCT
+  columns:
+  - name: ORDER_ID
+    description: ORDER_ID column
+    tests:
+    - not_null
+  - name: PRODUCT_ID
+    description: PRODUCT_ID column
+    tests:
+    - not_null
+  meta:
+    source_system: UNKNOWN

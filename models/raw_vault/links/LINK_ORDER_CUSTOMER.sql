@@ -7,23 +7,29 @@
     )
 }}
 
-{# HUB: HUB_ORDER - Business Keys: ORDER_ID #}
+{# LINK: LINK_ORDER_CUSTOMER - Connecting: ORDER_ID, CUSTOMER_ID #}
 
 SELECT
-    HK_H_HUB_ORDER,
+    HK_L_LINK_ORDER_CUSTOMER,
+    HK_H_ORDER,
+    HK_H_CUSTOMER,
     ORDER_ID,
+        CUSTOMER_ID,
     LOAD_TS,
     RECORD_SOURCE
 FROM (
     SELECT
-        {{ dv_hash(['ORDER_ID'], 'HK_H_HUB_ORDER') }},
+        {{ dv_hash(['ORDER_ID', 'CUSTOMER_ID'], 'HK_L_LINK_ORDER_CUSTOMER') }},
+        {{ dv_hash(['ORDER_ID'], 'HK_H_ORDER') }},
+        {{ dv_hash(['CUSTOMER_ID'], 'HK_H_CUSTOMER') }},
         ORDER_ID,
+        CUSTOMER_ID,
         CURRENT_TIMESTAMP() AS LOAD_TS,
         'RAW_ORDERS' AS RECORD_SOURCE
     FROM {{ source('demo_db_dbt_dev', 'RAW_ORDERS') }}
-    WHERE ORDER_ID IS NOT NULL
+    WHERE ORDER_ID IS NOT NULL AND CUSTOMER_ID IS NOT NULL
 )
 QUALIFY ROW_NUMBER() OVER (
-    PARTITION BY HK_H_HUB_ORDER
+    PARTITION BY HK_L_LINK_ORDER_CUSTOMER
     ORDER BY LOAD_TS
 ) = 1

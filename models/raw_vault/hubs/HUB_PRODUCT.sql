@@ -7,12 +7,7 @@
     )
 }}
 
-{#
-    =========================================================================
-    HUB: HUB_PRODUCT (Dynamic Table)
-    =========================================================================
-    Business Keys: PRODUCT_ID
-#}
+{# HUB: HUB_PRODUCT - Business Keys: PRODUCT_ID #}
 
 SELECT
     HK_H_HUB_PRODUCT,
